@@ -1,3 +1,8 @@
+/** shorthand
+fn p1(d: &[i32]) -> usize {d.windows(2).filter(|w| w[1] > w[0]).count()}
+fn p2(d: &[i32]) -> usize {d.windows(4).filter(|w| w[3] > w[0]).count()}
+*/
+
 const READINGS: [i32; 2000] = [
     182, 188, 204, 203, 205, 206, 208, 216, 217, 218, 219, 225, 226, 207, 204, 205, 217, 255, 254,
     270, 261, 262, 264, 265, 255, 257, 249, 248, 249, 250, 265, 286, 308, 309, 317, 326, 328, 316,
@@ -124,11 +129,7 @@ fn count_increases(readings: &[i32]) -> usize {
 }
 
 fn count_combined_increases(readings: &[i32]) -> usize {
-    let combined: Vec<i32> = readings
-        .windows(3)
-        .map(|w| w.into_iter().sum()).collect();
-    count_increases(&combined)
-
+    readings.windows(4).filter(|w| w[3] > w[0]).count()
 }
 
 fn main() {
